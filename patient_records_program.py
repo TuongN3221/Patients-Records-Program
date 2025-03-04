@@ -13,23 +13,24 @@ z = ["1","2","3","4","5","6"]
 
 print(patient_name,"\n",condition,"\n",hospital_room_number,"\n",nights_stayed,"\n",patient_proceedure,"\n",procedure_cost,"\n",room_charge,"\n",inscurance_company,"\n",copayment,"\n",z)
 
-# Function for the program's main menu
+# Function for the program's Main Menu
 def main_menu():
   while True:
-    print("\n   --- Hospital Admitance---   ")
-    print("\nTo update a patient, selectionect 1\nTo Request patient information, selectionect 2\nTo request patient's bill, selectionect 3\nTo terminate program program, selectionect 4\n")
+    print("\n   --- Hospital Admittance System---   ")
+    print("\nTo update a patient, select 1\nTo Request patient information, select 2\nTo request patient's bill, select 3\nTo terminate program program, select 4\n")
     selection = input("\nWhat do you want to do?")
     if selection == "1":
-      print("\n   --- Patient Update---   ")
+      print("\n   --- Update Patient---   ")
       update_patient()
     elif selection == "2":
-      print("\n   --- Patient Info---   ")
+      print("\n   --- Patient Records---   ")
       patient_info()
     elif selection == "3":
-      print("\n   --- Patient Bill---   ")
+      print("\n   --- Patient Billing---   ")
       patient_billing()
     elif selection == "4":
       print("\n   --- Terminate Program---   ")
+      close_program()
       break
     else: 
       print("\nInvalid Selection. Select a Number between 1 and 4")
@@ -46,26 +47,26 @@ def update_patient():
     copayment[a] = input("\nInput Insurance co-payment or percentage:")
     condition[a] = input("\nInput reason for admittance: ")
     patient_proceedure[a] = input("\nInput Treatment plan: ")
-    print("\nRecord of patient", patient_name[a], hospital_room_number[a], copayment[a], condition[a], patient_proceedure[a])
+    print("\nRecord of New Patient:", patient_name[a], hospital_room_number[a], copayment[a], condition[a], patient_proceedure[a])
   else:
     print("\nInvalid entry! Please eter a number 1 through 6!")
     update_patient()
     
-# print patient records
+# Function to print patient records
 def patient_info():
   a = (input("\nSelect a patient to view info. Enter 1-6. "))
   if a in z:
     a = int(a)
     a = a - 1
-    print ("\nRecord of patient", patient_name[a], hospital_room_number[a], inscurance_company[a], copayment[a], condition[a], patient_proceedure[a])
+    print ("\nRecord of Requested Patient:", patient_name[a], hospital_room_number[a], inscurance_company[a], copayment[a], condition[a], patient_proceedure[a])
     main_menu()
   else:
     print("\nInvalid Entry! Please enter a number 1 through 6!")
     patient_info()
 
-# print patient bill
+# Function view patient billing information
 def patient_billing():
-  a = input("\nselectionect a patient to view bill? Enter 1-6. ")
+  a = input("\nSelect a patient to their Billing Information? Enter 1-6. ")
   if a in z:
     a = int(a)
     a= a - 1
@@ -90,4 +91,6 @@ def patient_billing():
 # Funciton to terminate the program 
 def close_program():
   print("\nThis program is terminated!\nHave a nice day!")
+
+# Run the program
 main_menu()
