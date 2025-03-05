@@ -1,17 +1,17 @@
-# Data
-patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomez","Arnold James","Jona Johnson"]
+# Patient Data
+patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomeinput_commands","Arnold James","Jona Johnson"]
 condition = ["Broken Arm", "Stomach Laceration","Kidney Stone","Intestinal issues","Broken nose","stroke" ]
 hospital_room_number = ["328","329","214","410","407","414"]
 nights_stayed = [2, 1, 3, 4, 5, 7]
 patient_proceedure = ["Surgery","Stitches","Monitored passage","Gastronomy", "Reconstructive surgery","Stint"]
 procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
 room_charge = [325, 325, 325, 340, 340, 340]
-inscurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
+insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
 # idiot check for if statement thing
-z = ["1","2","3","4","5","6"]
+input_commands = ["1","2","3","4","5","6"]
 
-print(patient_name,"\n",condition,"\n",hospital_room_number,"\n",nights_stayed,"\n",patient_proceedure,"\n",procedure_cost,"\n",room_charge,"\n",inscurance_company,"\n",copayment,"\n",z)
+print(patient_name,"\n",condition,"\n",hospital_room_number,"\n",nights_stayed,"\n",patient_proceedure,"\n",procedure_cost,"\n",room_charge,"\n",insurance_company,"\n",copayment,"\n",input_commands)
 
 # Function for the program's Main Menu
 def main_menu():
@@ -37,28 +37,28 @@ def main_menu():
 
 # Function to update patient information
 def update_patient():
-  a = input("\nWhich Patient is being replaced? Enter 1-6. ")
-  if a in z:
-    a = int(a)
-    a = a - 1
-    patient_name[a] = input("\nInput Patient Name: ")
-    hospital_room_number[a] = input("\nInput room number: ")
-    inscurance_company[a] = input("\nInput Insurance name: ")
-    copayment[a] = input("\nInput Insurance co-payment or percentage:")
-    condition[a] = input("\nInput reason for admittance: ")
-    patient_proceedure[a] = input("\nInput Treatment plan: ")
-    print("\nRecord of New Patient:", patient_name[a], hospital_room_number[a], copayment[a], condition[a], patient_proceedure[a])
+  patient_index = input("\nWhich Patient is being replaced? Enter 1-6. ")
+  if patient_index in input_commands:
+    patient_index = int(patient_index)
+    patient_index = patient_index - 1
+    patient_name[patient_index] = input("\nInput Patient Name: ")
+    hospital_room_number[patient_index] = input("\nInput room number: ")
+    insurance_company[patient_index] = input("\nInput Insurance name: ")
+    copayment[patient_index] = input("\nInput Insurance co-payment or percentage:")
+    condition[patient_index] = input("\nInput reason for admittance: ")
+    patient_proceedure[patient_index] = input("\nInput Treatment plan: ")
+    print("\nRecord of New Patient:", patient_name[patient_index], hospital_room_number[patient_index], copayment[patient_index], condition[patient_index], patient_proceedure[patient_index])
   else:
     print("\nInvalid entry! Please eter a number 1 through 6!")
     update_patient()
     
 # Function to print patient records
 def patient_info():
-  a = (input("\nSelect a patient to view info. Enter 1-6. "))
-  if a in z:
-    a = int(a)
-    a = a - 1
-    print ("\nRecord of Requested Patient:", patient_name[a], hospital_room_number[a], inscurance_company[a], copayment[a], condition[a], patient_proceedure[a])
+  patient_index = (input("\nSelect a patient to view info. Enter 1-6. "))
+  if patient_index in input_commands:
+    patient_index = int(patient_index)
+    patient_index = patient_index - 1
+    print ("\nRecord of Requested Patient:", patient_name[patient_index], hospital_room_number[patient_index], insurance_company[patient_index], copayment[patient_index], condition[patient_index], patient_proceedure[patient_index])
     main_menu()
   else:
     print("\nInvalid Entry! Please enter a number 1 through 6!")
@@ -66,20 +66,20 @@ def patient_info():
 
 # Function view patient billing information
 def patient_billing():
-  a = input("\nSelect a patient to their Billing Information? Enter 1-6. ")
-  if a in z:
-    a = int(a)
-    a= a - 1
-    if isinstance (copayment[a], int):
-      total = nights_stayed[a] * room_charge[a] + procedure_cost[a]
-      instotal = total - copayment[a]
+  patient_index = input("\nSelect a patient to their Billing Information? Enter 1-6. ")
+  if patient_index in input_commands:
+    patient_index = int(patient_index)
+    patient_index = patient_index - 1
+    if isinstance (copayment[patient_index], int):
+      total = nights_stayed[patient_index] * room_charge[patient_index] + procedure_cost[patient_index]
+      instotal = total - copayment[patient_index]
       print("\nTotal cost $"+ str(total))
       print("Total insurance pays $"+ str(instotal))
-      print("Patient total due $"+ str(copayment[a]))
+      print("Patient total due $"+ str(copayment[patient_index]))
       main_menu()
     else:
-      total = nights_stayed[a] * room_charge[a] + procedure_cost[a]
-      ptotal = copayment[a] * total 
+      total = nights_stayed[patient_index] * room_charge[patient_index] + procedure_cost[patient_index]
+      ptotal = copayment[patient_index] * total 
       instotal = total - ptotal
       print("\nTotal cost $"+ str(total))
       print("Total insurance pays $"+ str(ptotal))
