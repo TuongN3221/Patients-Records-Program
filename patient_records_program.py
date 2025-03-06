@@ -8,16 +8,15 @@ procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
 room_charge = [325, 325, 325, 340, 340, 340]
 insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
-# idiot check for if statement thing
-input_commands = ["1","2","3","4","5","6"]
 
-print(patient_name,"\n",condition,"\n",hospital_room_number,"\n",nights_stayed,"\n",patient_proceedure,"\n",procedure_cost,"\n",room_charge,"\n",insurance_company,"\n",copayment,"\n",input_commands)
+# Input commands for program to function
+input_commands = ["1","2","3","4","5","6"]
 
 # Function for the program's Main Menu
 def main_menu():
   while True:
     print("\n   --- Hospital Admittance System---   ")
-    print("\nTo update a patient, select 1\nTo Request patient information, select 2\nTo request patient's bill, select 3\nTo terminate program program, select 4\n")
+    print("\nTo update a patient, select 1\nTo Request patient information, select 2\nTo request patient's bill, select 3\nTo view current patients, select 4\nTo terminate program program, select 5\n")
     selection = input("\nWhat do you want to do?")
     if selection == "1":
       print("\n   --- Update Patient---   ")
@@ -29,6 +28,9 @@ def main_menu():
       print("\n   --- Patient Billing---   ")
       patient_billing()
     elif selection == "4":
+      print("\n   --- Current Patients---   ")  
+      current_patients()
+    elif selection == "5":
       print("\n   --- Terminate Program---   ")
       close_program()
       break
@@ -94,6 +96,12 @@ def patient_billing():
 
   else:
     print("\nInvalid Entry! Please enter a number 1 through 6.")
+
+def current_patients():
+    print("\nPatient Names:")
+    for i, name in enumerate(patient_name, start=1):
+        print(f"{i}. {name}")
+    main_menu()
 
 # Funciton to terminate the program 
 def close_program():
