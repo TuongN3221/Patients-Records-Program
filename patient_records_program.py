@@ -40,7 +40,6 @@ def main_menu():
 # Function to update patient information
 def update_patient():
   patient_index = input("\nWhich Patient is being replaced? Enter 1-6. ")
-
   if patient_index in input_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
@@ -50,7 +49,13 @@ def update_patient():
     copayment[patient_index] = input("\nInput Insurance co-payment or percentage:")
     condition[patient_index] = input("\nInput reason for admittance: ")
     patient_proceedure[patient_index] = input("\nInput Treatment plan: ")
-    print("\nRecord of New Patient:", patient_name[patient_index], hospital_room_number[patient_index], copayment[patient_index], condition[patient_index], patient_proceedure[patient_index])
+    print("\nRecord of New Patient:", 
+          "\nName:",patient_name[patient_index], 
+          "\nRoom Number:",hospital_room_number[patient_index], 
+          "\nInsurance:", insurance_company[patient_index],
+          "\nCopayment:",copayment[patient_index], 
+          "\nCondition:",condition[patient_index], 
+          "\nProcedure:",patient_proceedure[patient_index])
 
   else:
     print("\nInvalid entry! Please enter a number 1 through 6!")
@@ -58,12 +63,20 @@ def update_patient():
     
 # Function to print patient records
 def patient_info():
+  total_patients = len(patient_name)
+  print(f"\nTotal number of patients: {total_patients}")
   patient_index = (input("\nSelect a patient to view info. Enter 1-6. "))
 
   if patient_index in input_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
-    print ("\nRecord of Requested Patient:", patient_name[patient_index], hospital_room_number[patient_index], insurance_company[patient_index], copayment[patient_index], condition[patient_index], patient_proceedure[patient_index])
+    print ("\nRecord of Requested Patient:", 
+           "\nPatient:", patient_name[patient_index], 
+           "\nRoom Number:", hospital_room_number[patient_index], 
+           "\nInsurance:", insurance_company[patient_index], 
+           "\nCo-payment:", copayment[patient_index], 
+           "\nCondition: ", condition[patient_index], 
+           "\nProcedure: ", patient_proceedure[patient_index])
     main_menu()
 
   else:
@@ -72,6 +85,9 @@ def patient_info():
 
 # Function view patient billing information
 def patient_billing():
+  total_patients = len(patient_name)
+  print(f"\nTotal number of patients: {total_patients}")
+
   patient_index = input("\nSelect a patient to their Billing Information? Enter 1-6. ")
   if patient_index in input_commands:
     patient_index = int(patient_index)
@@ -98,6 +114,8 @@ def patient_billing():
     print("\nInvalid Entry! Please enter a number 1 through 6.")
 
 def current_patients():
+    total_patients = len(patient_name)
+    print(f"\nTotal Number of Patients: {total_patients}")
     print("\nPatient Names:")
     for i, name in enumerate(patient_name, start=1):
         print(f"{i}. {name}")
