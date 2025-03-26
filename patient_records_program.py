@@ -5,7 +5,7 @@ hospital_room_number = ["328","329","214","410","407","414"]
 nights_stayed = [2, 1, 3, 4, 5, 7]
 patient_proceedure = ["Surgery","Stitches","Monitored passage","Gastronomy", "Reconstructive surgery","Stint"]
 procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
-room_charge = [325, 325, 325, 340, 340, 340]
+room_charge = [340, 340, 340, 340, 340, 340]
 insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
 
@@ -16,21 +16,24 @@ input_commands = ["1","2","3","4","5","6"]
 def main_menu():
   while True:
     print("\n   --- Hospital Admittance System---   ")
-    print("\nTo update a patient, select 1\nTo Request patient information, select 2\nTo request patient's bill, select 3\nTo view current patients, select 4\nTo terminate program program, select 5\n")
+    print("\nTo update a patient, select 1\nTo add a new patient, select 2\nTo Request patient information, select 3\nTo request patient's bill, select 4\nTo view current patients, select 5\nTo terminate program program, select 6\n")
     selection = input("\nWhat do you want to do?")
     if selection == "1":
       print("\n   --- Update Patient---   ")
       update_patient()
     elif selection == "2":
-      print("\n   --- Patient Records---   ")
-      patient_info()
+      print("\n   --- Add New Patient---   ")
+      add_patient()
     elif selection == "3":
+      print("\n   --- Access Patient Records---   ")
+      patient_info()
+    elif selection == "4":
       print("\n   --- Patient Billing---   ")
       patient_billing()
-    elif selection == "4":
+    elif selection == "5":
       print("\n   --- Current Patients---   ")  
       current_patients()
-    elif selection == "5":
+    elif selection == "6":
       print("\n   --- Terminate Program---   ")
       close_program()
       break
@@ -40,6 +43,8 @@ def main_menu():
 # Function to update patient information
 def update_patient():
   patient_index = input("\nWhich Patient is being replaced? Enter 1-6. ")
+  total_patients = len(patient_name)
+  print(f"\nTotal number of patients: {total_patients}")
   if patient_index in input_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
@@ -61,6 +66,41 @@ def update_patient():
     print("\nInvalid entry! Please enter a number 1 through 6!")
     update_patient()
     
+# Function to add a new patient    
+def add_patient():
+  # Inputs to add the new patient to the hospital records
+  print("\n   --- Add New Patient---   ")
+  new_patient = input("\nEnter Patient Name: ")
+  new_condition = input("Enter Patient Condition: ")
+  new_room = input("Input Patient Room: ")
+  new_procedure = input("Enter Procedure: ")
+  new_procedure_cost = float(input("Enter Procedure Cost: "))
+  new_insurance = input("Enter Patient's Insurance: ")
+
+  # Handles Co-payment Input (Percent or Whole Number)
+  copay_input = input("Enter co-payment (fixed amount) or percentage (e.g., 0.15 for 15%): ")
+  try:
+    if '.' in copay_input:
+      copayment.append(float(copay_input))
+    else:
+      copayment.append(int(copay_input))
+  except ValueError:
+    print("INVALID CO-PAYMENT INPUT.")
+
+  # Adds the new patient to the arrays
+  patient_name.append(new_patient)
+  condition.append(new_condition)
+  hospital_room_number.append(new_room)
+  nights_stayed.append(0)# Nights stayed set to zero due to patient being recently admitted
+  patient_proceedure.append(new_procedure)
+  procedure_cost.append(new_procedure_cost)
+  room_charge.append(340) # Default room charge for patients
+  insurance_company.append(new_insurance)
+
+  print(f"Patient {new_patient} has been added to the system.")
+
+  main_menu()
+
 # Function to print patient records
 def patient_info():
   total_patients = len(patient_name)
@@ -113,6 +153,7 @@ def patient_billing():
   else:
     print("\nInvalid Entry! Please enter a number 1 through 6.")
 
+# Function to check patients currently admitted
 def current_patients():
     total_patients = len(patient_name)
     print(f"\nTotal Number of Patients: {total_patients}")
