@@ -1,5 +1,5 @@
 # Patient Data
-patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomeinput_commands","Arnold James","Jona Johnson"]
+patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomeget_valid_commands","Arnold James","Jona Johnson"]
 condition = ["Broken Arm", "Stomach Laceration","Kidney Stone","Intestinal issues","Broken nose","stroke" ]
 hospital_room_number = ["328","329","214","410","407","414"]
 nights_stayed = [2, 1, 3, 4, 5, 7]
@@ -10,7 +10,8 @@ insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna",
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
 
 # Input commands for program to function
-input_commands = ["1","2","3","4","5","6"]
+def get_valid_commands():
+  return [str(i) for i in range(1, len(patient_name) + 1)]
 
 # Function for the program's Main Menu
 def main_menu():
@@ -42,10 +43,11 @@ def main_menu():
 
 # Function to update patient information
 def update_patient():
-  patient_index = input("\nWhich Patient is being replaced? Enter 1-6. ")
+  patient_index = input("\nWhich Patient is being replaced?")
+  valid_commands = get_valid_commands()
   total_patients = len(patient_name)
   print(f"\nTotal number of patients: {total_patients}")
-  if patient_index in input_commands:
+  if patient_index in valid_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
     patient_name[patient_index] = input("\nInput Patient Name: ")
@@ -63,13 +65,12 @@ def update_patient():
           "\nProcedure:",patient_proceedure[patient_index])
 
   else:
-    print("\nInvalid entry! Please enter a number 1 through 6!")
+    print("\nInvalid entry! Enter 1-{}!".format(total_patients))
     update_patient()
     
 # Function to add a new patient    
 def add_patient():
   # Inputs to add the new patient to the hospital records
-  print("\n   --- Add New Patient---   ")
   new_patient = input("\nEnter Patient Name: ")
   new_condition = input("Enter Patient Condition: ")
   new_room = input("Input Patient Room: ")
@@ -85,7 +86,8 @@ def add_patient():
     else:
       copayment.append(int(copay_input))
   except ValueError:
-    print("INVALID CO-PAYMENT INPUT.")
+    print("INVALID CO-PAYMENT INPUT. SETTING COPAYMENT TO 0")
+    copayment.append(0)
 
   # Adds the new patient to the arrays
   patient_name.append(new_patient)
@@ -105,9 +107,10 @@ def add_patient():
 def patient_info():
   total_patients = len(patient_name)
   print(f"\nTotal number of patients: {total_patients}")
-  patient_index = (input("\nSelect a patient to view info. Enter 1-6. "))
+  valid_commands = get_valid_commands()
+  patient_index = input("\nSelect a patient to view info. Enter 1-{}: ".format(total_patients))
 
-  if patient_index in input_commands:
+  if patient_index in valid_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
     print ("\nRecord of Requested Patient:", 
@@ -120,16 +123,17 @@ def patient_info():
     main_menu()
 
   else:
-    print("\nInvalid Entry. Please enter a number 1 through 6.")
+    print("\nInvalid Entry. Enter 1-{}.".format(total_patients))
     patient_info()
 
 # Function view patient billing information
 def patient_billing():
   total_patients = len(patient_name)
+  valid_commands = get_valid_commands()
   print(f"\nTotal number of patients: {total_patients}")
 
-  patient_index = input("\nSelect a patient to their Billing Information? Enter 1-6. ")
-  if patient_index in input_commands:
+  patient_index = input("\nSelect a patient to their Billing Information")
+  if patient_index in valid_commands:
     patient_index = int(patient_index)
     patient_index = patient_index - 1
 
@@ -151,7 +155,7 @@ def patient_billing():
       main_menu()
 
   else:
-    print("\nInvalid Entry! Please enter a number 1 through 6.")
+    print("\nInvalid Entry. Enter a number from 1-{}.".format(total_patients))
 
 # Function to check patients currently admitted
 def current_patients():
