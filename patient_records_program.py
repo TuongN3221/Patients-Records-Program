@@ -8,6 +8,7 @@ procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
 room_charge = [340, 340, 340, 340, 340, 340]
 insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
+patient_dob = ["01/23/1999", "07/22/1984", "03/03/2001", "06/02/2013", "09/01/1943", "12/23/2000"]
 
 # Input commands for program to function
 def get_valid_commands():
@@ -51,6 +52,14 @@ def update_patient():
     patient_index = int(patient_index)
     patient_index = patient_index - 1
     patient_name[patient_index] = input("\nInput Patient Name: ")
+    # Validate DOB format
+    while True:
+      dob = input("\nInput Date of Birth (MM/DD/YYYY): ")
+      if len(dob) == 10 and dob[2] == '/' and dob[5] == '/':
+        patient_dob[patient_index] = dob
+        break
+      else:
+        print("Invalid Format. Use MM/DD/YYYY (e.g., 1/23/1999)")
     hospital_room_number[patient_index] = input("\nInput room number: ")
     insurance_company[patient_index] = input("\nInput Insurance name: ")
     copayment[patient_index] = input("\nInput Insurance co-payment or percentage:")
@@ -72,13 +81,20 @@ def update_patient():
 def add_patient():
   # Inputs to add the new patient to the hospital records
   new_patient = input("\nEnter Patient Name: ")
+  # Validates DOB format (MM/DD/YYYY)
+  while True:
+    new_dob = input("Enter Patient Date of Birth (MM/DD/YYYY): ")
+    if len(new_dob) == 10 and new_dob[2] and new_dob[5] == '/':
+      break 
+    else:
+      print("Invalid Format. Use MM/DD/YYYY (e.g., 01/23/1999)")
   new_condition = input("Enter Patient Condition: ")
   new_room = input("Input Patient Room: ")
   new_procedure = input("Enter Procedure: ")
   new_procedure_cost = float(input("Enter Procedure Cost: "))
   new_insurance = input("Enter Patient's Insurance: ")
-
-  # Handles Co-payment Input (Percent or Whole Number)
+  
+  # Validates Co-payment Input (Percent or Whole Number)
   copay_input = input("Enter co-payment (fixed amount) or percentage (e.g., 0.15 for 15%): ")
   try:
     if '.' in copay_input:
@@ -98,6 +114,7 @@ def add_patient():
   procedure_cost.append(new_procedure_cost)
   room_charge.append(340) # Default room charge for patients
   insurance_company.append(new_insurance)
+  patient_dob.append(new_dob)
 
   print(f"Patient {new_patient} has been added to the system.")
 
@@ -114,7 +131,8 @@ def patient_info():
     patient_index = int(patient_index)
     patient_index = patient_index - 1
     print ("\nRecord of Requested Patient:", 
-           "\nPatient:", patient_name[patient_index], 
+           "\nPatient:", patient_name[patient_index],
+           "\nPatient Date of Birth:", patient_dob[patient_index],
            "\nRoom Number:", hospital_room_number[patient_index], 
            "\nInsurance:", insurance_company[patient_index], 
            "\nCo-payment:", copayment[patient_index], 
