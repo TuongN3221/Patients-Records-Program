@@ -31,6 +31,7 @@ This Python program is a Hospital Admittance System designed to manage patient r
 3. python patient_records.py
 
 
+```
 # Attribution and History
 This project is a remake of the [original 2021 code](https://replit.com/@TuongNguyen4/full-hospital-code?v=1). created by Tuong Nguyen in 2021. 
 The original code served as the foundation for this updated version, which is being modernized and expanded in March 2025.
