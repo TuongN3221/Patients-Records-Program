@@ -1,9 +1,9 @@
 # Patient Data
 patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomeget_valid_commands","Arnold James","Jona Johnson"]
-condition = ["Broken Arm", "Stomach Laceration","Kidney Stone","Intestinal issues","Broken nose","stroke" ]
+condition = ["Broken Arm", "Stomach Laceration","Kidney Stone","Intestinal Issues","Broken nose","Stroke" ]
 hospital_room_number = ["328","329","214","410","407","414"]
 nights_stayed = [2, 1, 3, 4, 5, 7]
-patient_proceedure = ["Surgery","Stitches","Monitored passage","Gastronomy", "Reconstructive surgery","Stint"]
+patient_proceedure = ["Surgery","Stitches","Monitored Passage","Gastronomy", "Reconstructive Surgery","Stint"]
 procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
 room_charge = [340, 340, 340, 340, 340, 340]
 insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
@@ -72,7 +72,8 @@ def update_patient():
           "\nCopayment:",copayment[patient_index], 
           "\nCondition:",condition[patient_index], 
           "\nProcedure:",patient_proceedure[patient_index])
-
+    print("\nPatient record has been updated.")
+    main_menu()
   else:
     print("\nInvalid entry! Enter 1-{}!".format(total_patients))
     update_patient()
@@ -91,7 +92,17 @@ def add_patient():
   new_condition = input("Enter Patient Condition: ")
   new_room = input("Input Patient Room: ")
   new_procedure = input("Enter Procedure: ")
-  new_procedure_cost = float(input("Enter Procedure Cost: "))
+  #  Validates Procedure Cost Input (Whole Number)
+  while True:
+    try:
+      new_procedure_cost = float(input("Enter Procedure Cost: "))
+      if new_procedure_cost.is_integer():
+        new_procedure_cost = int(new_procedure_cost)
+        break
+      else:
+        print("Procedure cost must be a whole number. Please try again.")
+    except ValueError:
+      print("Invalid input. Please enter a valid whole number.")
   new_insurance = input("Enter Patient's Insurance: ")
   
   # Validates Co-payment Input (Percent or Whole Number)
