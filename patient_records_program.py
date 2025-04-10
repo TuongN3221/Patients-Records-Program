@@ -3,12 +3,28 @@ patient_name = ["John Doe","Jane Doe", "Bill Smith","Alena Gomeget_valid_command
 condition = ["Broken Arm", "Stomach Laceration","Kidney Stone","Intestinal Issues","Broken nose","Stroke" ]
 hospital_room_number = ["328","329","214","410","407","414"]
 nights_stayed = [2, 1, 3, 4, 5, 7]
-patient_proceedure = ["Surgery","Stitches","Monitored Passage","Gastronomy", "Reconstructive Surgery","Stint"]
+patient_procedure = ["Surgery","Stitches","Monitored Passage","Gastronomy", "Reconstructive Surgery","Stint"]
 procedure_cost = [5000, 2400, 500, 1700, 14000, 400000]
 room_charge = [340, 340, 340, 340, 340, 340]
 insurance_company = ["Aetna","Humana","Blue Cross","United Health Care","Cigna","Kaiser Permanente"]
 copayment = [750, 0.1, 0.15, 0.12, 0.15, 500]
 patient_dob = ["01/23/1999", "07/22/1984", "03/03/2001", "06/02/2013", "09/01/1943", "12/23/2000"]
+# The above data will be stored into a file called patient_records.txt
+with open("patient_records.txt", "w") as file:
+  for i in range(len(patient_name)):
+    file.write(f"Patient: {patient_name[i]}\n")
+    file.write(f"Date of Birth: {patient_dob[i]}\n")
+    file.write(f"Condition: {condition[i]}\n")
+    file.write(f"Room Number: {hospital_room_number[i]}\n")
+    file.write(f"Night Stayed: {nights_stayed[i]}\n")
+    file.write(f"Patient Procedure: {patient_procedure[i]}\n")
+    file.write(f"Procedure Cost: {procedure_cost[i]}\n")
+    file.write(f"Room Charge: {room_charge[i]}\n")
+    file.write(f"Insurance Company: {insurance_company[i]}\n")
+    file.write(f"Copayment: {copayment[i]}\n")
+    file.write("\n")  # Add a blank line between records
+# The above data will be stored into a file called patient_records.txt
+
 
 # Input commands for program to function
 def get_valid_commands():
@@ -64,14 +80,14 @@ def update_patient():
     insurance_company[patient_index] = input("\nInput Insurance name: ")
     copayment[patient_index] = input("\nInput Insurance co-payment or percentage:")
     condition[patient_index] = input("\nInput reason for admittance: ")
-    patient_proceedure[patient_index] = input("\nInput Treatment plan: ")
+    patient_procedure[patient_index] = input("\nInput Treatment plan: ")
     print("\nRecord of New Patient:", 
           "\nName:",patient_name[patient_index], 
           "\nRoom Number:",hospital_room_number[patient_index], 
           "\nInsurance:", insurance_company[patient_index],
           "\nCopayment:",copayment[patient_index], 
           "\nCondition:",condition[patient_index], 
-          "\nProcedure:",patient_proceedure[patient_index])
+          "\nProcedure:",patient_procedure[patient_index])
     print("\nPatient record has been updated.")
     main_menu()
   else:
@@ -121,12 +137,15 @@ def add_patient():
   condition.append(new_condition)
   hospital_room_number.append(new_room)
   nights_stayed.append(0)# Nights stayed set to zero due to patient being recently admitted
-  patient_proceedure.append(new_procedure)
+  patient_procedure.append(new_procedure)
   procedure_cost.append(new_procedure_cost)
   room_charge.append(340) # Default room charge for patients
   insurance_company.append(new_insurance)
   patient_dob.append(new_dob)
 
+  # Store the new patient data in the file
+  store_patient_data()
+  # Print the new patient record notification
   print(f"Patient {new_patient} has been added to the system.")
 
   main_menu()
@@ -148,7 +167,7 @@ def patient_info():
            "\nInsurance:", insurance_company[patient_index], 
            "\nCo-payment:", copayment[patient_index], 
            "\nCondition: ", condition[patient_index], 
-           "\nProcedure: ", patient_proceedure[patient_index])
+           "\nProcedure: ", patient_procedure[patient_index])
     main_menu()
 
   else:
@@ -194,6 +213,22 @@ def current_patients():
     for i, name in enumerate(patient_name, start=1):
         print(f"{i}. {name}")
     main_menu()
+
+# Method to store a newly added patient to patient_records.txt
+def store_patient_data():
+    with open("patient_records.txt", "a") as file:
+        file.write(f"Patient: {patient_name[-1]}\n")
+        file.write(f"Date of Birth: {patient_dob[-1]}\n")
+        file.write(f"Condition: {condition[-1]}\n")
+        file.write(f"Room Number: {hospital_room_number[-1]}\n")
+        file.write(f"Night Stayed: {nights_stayed[-1]}\n")
+        file.write(f"Patient Procedure: {patient_procedure[-1]}\n")
+        file.write(f"Procedure Cost: {procedure_cost[-1]}\n")
+        file.write(f"Room Charge: {room_charge[-1]}\n")
+        file.write(f"Insurance Company: {insurance_company[-1]}\n")
+        file.write(f"Copayment: {copayment[-1]}\n")
+        file.write("\n")  # Add a blank line between records
+
 
 # Funciton to terminate the program 
 def close_program():
